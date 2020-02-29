@@ -1,0 +1,15 @@
+flow:
+  ☐ import data, either as CSV, link a google doc or a live editor!
+    ☐ data can have \n to help 
+  ☐ convert data to json
+  ☐ create tiles
+    ☐ number of tiles defined by data
+    ☐ always a title tile
+      ☐ can add multiple "guest mixes"
+      ☐ change the date
+    ☐ tiles have options
+      ☐ add an image and colour overlay
+      ☐ add a title (for guest mixes)
+        ☐ drop height of the E and A characters
+    ☐ tiles print the tracks - artist (label), right-aligned from bottom
+    
