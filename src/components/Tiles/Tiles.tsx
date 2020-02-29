@@ -17,8 +17,8 @@ const Tiles = (props: TilesType) => (
         }
         return acc;
       }, [])
-      .map((page: Number) => (
-        <Tile data={props.data.filter(tile => tile.Page === page)} />
+      .map((page: Number, i) => (
+        <Tile key={i} data={props.data.filter(tile => tile.Page === page)} />
       ))}
   </section>
 );
