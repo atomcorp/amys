@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
-import domtoimage from "dom-to-image";
-import { saveAs } from "file-saver";
+import React, { useRef, useReducer } from "react";
+import immer from "immer";
 
-import { TrackType } from "types";
+import { TrackType, StateType, ActionTypes } from "types";
 import css from "./Tile.module.css";
+import TileTools from "components/Tile/TileTools";
 
 type TileType = {
   data: TrackType[];
@@ -23,12 +23,50 @@ const handleNewLines = (string: String) => {
   });
 };
 
+const initialState = {
+  showImg: false,
+  isFeature: false,
+  feature: "Enter feature..."
+};
+
+const reducer = (state: StateType, action: ActionTypes) => {
+  return immer(state, draftState => {
+    switch (action.type) {
+      case "showImage/set":
+        draftState.showImg = action.payload;
+        break;
+    }
+  });
+};
+
 const Tile = (props: TileType) => {
-  const ref = useRef(null);
-  console.log(ref);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const tileRef = useRef<null | HTMLElement>(null);
+  const imgContainerRef = useRef<null | HTMLDivElement>(null);
+  const addImage = (imgEl: HTMLImageElement) => {
+    dispatch({ type: "showImage/set", payload: true });
+    if (imgContainerRef.current != null) {
+      imgContainerRef.current.innerHTML = "";
+      const overlayEl = document.createElement("div");
+      overlayEl.classList.add(css.overlay);
+      imgContainerRef.current.appendChild(overlayEl);
+      imgContainerRef.current.appendChild(imgEl);
+    }
+  };
+  const removeImage = () => {
+    dispatch({ type: "showImage/set", payload: false });
+    if (imgContainerRef.current != null) {
+      imgContainerRef.current.innerHTML = "";
+    }
+  };
   return (
     <>
-      <section ref={ref} className={css.container}>
+      <section
+        ref={tileRef}
+        className={`${css.container} ${state.showImg ? css.showImg : ""}`}
+      >
+        <div ref={imgContainerRef} className={css.image}></div>
+        {state.isFeature && <div>{state.feature}</div>}
         {props.data.map((track, i) => (
           <div key={i} className={css.track}>
             <div className={css.main}>
@@ -41,22 +79,12 @@ const Tile = (props: TileType) => {
           </div>
         ))}
       </section>
-      <div>
-        <button
-          onClick={() => {
-            if (ref.current != null) {
-              const fragment = new DocumentFragment();
-              domtoimage
-                .toBlob(ref.current ?? fragment)
-                .then(function(blob: Blob) {
-                  saveAs(blob, "my-node.png");
-                });
-            }
-          }}
-        >
-          To PNG
-        </button>
-      </div>
+      <TileTools
+        domEl={tileRef.current}
+        addImage={addImage}
+        removeImage={removeImage}
+        dispatch={dispatch}
+      />
     </>
   );
 };
