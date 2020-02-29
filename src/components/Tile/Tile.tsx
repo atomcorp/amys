@@ -23,9 +23,25 @@ const handleNewLines = (string: String) => {
   });
 };
 
+const handleDroppedChars = (string: String) => {
+  return string
+    .toUpperCase()
+    .split("")
+    .map((string, i) => {
+      if (/A|E/.test(string)) {
+        return (
+          <span key={i} className={css.drop}>
+            {string}
+          </span>
+        );
+      }
+      return string;
+    });
+};
+
 const initialState = {
   showImg: false,
-  isFeature: false,
+  isFeature: true,
   feature: "Enter feature..."
 };
 
@@ -35,6 +51,11 @@ const reducer = (state: StateType, action: ActionTypes) => {
       case "showImage/set":
         draftState.showImg = action.payload;
         break;
+      case "isFeature/set":
+        draftState.isFeature = action.payload;
+        break;
+      case "feature/set":
+        draftState.feature = action.payload;
     }
   });
 };
@@ -66,7 +87,11 @@ const Tile = (props: TileType) => {
         className={`${css.container} ${state.showImg ? css.showImg : ""}`}
       >
         <div ref={imgContainerRef} className={css.image}></div>
-        {state.isFeature && <div>{state.feature}</div>}
+        {state.isFeature && (
+          <div className={css.featureTitle}>
+            - {handleDroppedChars(state.feature)}
+          </div>
+        )}
         {props.data.map((track, i) => (
           <div key={i} className={css.track}>
             <div className={css.main}>
@@ -84,6 +109,8 @@ const Tile = (props: TileType) => {
         addImage={addImage}
         removeImage={removeImage}
         dispatch={dispatch}
+        isFeature={state.isFeature}
+        feature={state.feature}
       />
     </>
   );
