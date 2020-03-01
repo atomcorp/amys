@@ -1,6 +1,7 @@
 import React, { useRef, useReducer } from "react";
 import immer from "immer";
 import domtoimage from "dom-to-image";
+import { saveAs } from "file-saver";
 
 import { TrackType, StateType, ActionTypes } from "types";
 import css from "./Tile.module.css";

@@ -1,5 +1,4 @@
 import React from "react";
-import { saveAs } from "file-saver";
 
 import { ActionTypes } from "types";
 import css from "./Tile.module.css";
