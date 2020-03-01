@@ -1,15 +1,18 @@
 flow:
-  ☐ import data, either as CSV, link a google doc or a live editor!
-    ☐ data can have \n to help 
-  ☐ convert data to json
-  ☐ create tiles
-    ☐ number of tiles defined by data
-    ☐ always a title tile
-      ☐ can add multiple "guest mixes"
-      ☐ change the date
-    ☐ tiles have options
-      ☐ add an image and colour overlay
-      ☐ add a title (for guest mixes)
-        ☐ drop height of the E and A characters
-    ☐ tiles print the tracks - artist (label), right-aligned from bottom
+  ✔ import data, either as CSV, link a google doc or a live editor! @done(20-03-01 12:35)
+    ✔ data can have \n to help @done(20-03-01 12:35)
+  ✔ convert data to json @done(20-03-01 12:35)
+  ✔ create tiles @done(20-03-01 12:35)
+    ✔ number of tiles defined by data @done(20-03-01 12:35)
+    ✔ always a title tile @done(20-03-01 12:35)
+      ✔ can add multiple "guest mixes" @done(20-03-01 12:35)
+      ✔ change the date @done(20-03-01 12:35)
+    ✔ tiles have options @done(20-03-01 12:36)
+      ✔ add an image @done(20-03-01 12:36)
+      ✘ colour overlay @cancelled(20-03-01 12:36)
+      ✔ add a title (for guest mixes) @done(20-03-01 12:36)
+        ✔ drop height of the E and A characters @done(20-03-01 12:36)
+    ✔ tiles print the tracks - artist (label), right-aligned from bottom @done(20-03-01 12:36)
     
+todo: 
+  ☐ convert 600 x 600 to 1080 x 1080

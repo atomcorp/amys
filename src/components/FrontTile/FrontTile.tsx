@@ -106,8 +106,8 @@ const TileFront = () => {
         >
           Convert to .png
         </button>
-        {" - "}
-        <label htmlFor="image">Background image</label>
+        <br />
+        <label htmlFor="image">Background image: </label>
         <input
           id="image"
           type="file"
@@ -122,8 +122,9 @@ const TileFront = () => {
             }
           }}
         />
+        <br />
         <label>
-          Features:
+          Features:{" "}
           <textarea
             rows={3}
             value={state.features}
@@ -133,18 +134,22 @@ const TileFront = () => {
             }}
           />
         </label>
-        <input
-          type="date"
-          value={state.date}
-          onChange={e => {
-            const target = e.target as HTMLInputElement;
-            if (target.value !== "") {
-              dispatch({ type: "date/set", payload: target.value });
-            } else {
-              dispatch({ type: "date/set", payload: initDate() });
-            }
-          }}
-        />
+        <br />
+        <label>
+          Date:{" "}
+          <input
+            type="date"
+            value={state.date}
+            onChange={e => {
+              const target = e.target as HTMLInputElement;
+              if (target.value !== "") {
+                dispatch({ type: "date/set", payload: target.value });
+              } else {
+                dispatch({ type: "date/set", payload: initDate() });
+              }
+            }}
+          />
+        </label>
       </div>
     </>
   );

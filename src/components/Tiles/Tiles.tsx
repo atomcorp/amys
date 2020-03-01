@@ -11,7 +11,6 @@ type TilesType = {
 
 const Tiles = (props: TilesType) => (
   <section className={css.container}>
-    <h1 className={css.title}>Amy's App</h1>
     <TileFront />
     {props.data
       .reduce((acc: number[], item) => {
