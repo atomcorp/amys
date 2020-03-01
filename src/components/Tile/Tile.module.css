@@ -1,6 +1,6 @@
 .container {
-  width: 600px;
-  height: 600px;
+  width: 1080px;
+  height: 1080px;
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -11,16 +11,17 @@
 }
 
 .track {
-  padding: 0 20px 30px;
+  padding: 0 20px 40px;
   position: relative;
 }
 
 .track:last-child {
-  padding: 0 20px 10px;
+  padding: 0 20px 20px;
 }
 
 .main {
-  font-size: 24px;
+  font-size: 48px;
+  line-height: 1.2;
 }
 
 .song {
@@ -33,28 +34,28 @@
 
 .label {
   color: #fff;
-  font-size: 18px;
+  font-size: 36px;
   font-style: italic;
-  transform: translateY(-3px);
+  transform: translateY(-6px);
 }
 
 .image {
   position: absolute;
-  width: 600px;
-  height: 600px;
+  width: 1080px;
+  height: 1080px;
   overflow: hidden;
 }
 
 .image img {
   display: block;
-  mix-blend-mode: hard-light;
 }
 
 .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #49eb79;
+  background: #a7f397;
+  opacity: 0.4;
 }
 
 .showImg .song {
@@ -63,15 +64,15 @@
 
 .featureTitle {
   text-transform: uppercase;
-  font-size: 24px;
+  font-size: 48px;
   color: #fff;
-  padding: 0 20px 30px;
+  padding: 0 20px 40px;
   position: relative;
 }
 
 .drop {
   display: inline-block;
-  transform: translateY(5px);
+  transform: translateY(10px);
 }
 
 .tools {

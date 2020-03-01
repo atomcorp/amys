@@ -15,4 +15,4 @@ flow:
     ✔ tiles print the tracks - artist (label), right-aligned from bottom @done(20-03-01 12:36)
     
 todo: 
-  ☐ convert 600 x 600 to 1080 x 1080
+  ✔ convert 600 x 600 to 1080 x 1080 @done(20-03-01 13:09)
