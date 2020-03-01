@@ -13,7 +13,7 @@ type TileType = {
 };
 
 const handleNewLines = (string: String) => {
-  return string.split("\n").map((string, i, ogArr) => {
+  return string.split("<br>").map((string, i, ogArr) => {
     if (ogArr.length - 1 > i) {
       return (
         <span key={i}>

@@ -84,7 +84,7 @@ const TileFront = () => {
           <div className={css.date}>{formatDate(state.date)}</div>
           <div className={css.title}>
             <span>
-              B<span className={css.drop}>E</span>NJI.
+              B<span className={css.drop}>E</span>NJI B.
             </span>
             <span>
               TR
