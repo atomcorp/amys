@@ -1,27 +1,23 @@
 import React from "react";
-import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 
 import { ActionTypes } from "types";
+import css from "./Tile.module.css";
 
 type TileToolsType = {
-  domEl: HTMLElement | null;
   addImage: (imgEl: HTMLImageElement) => void;
   removeImage: () => void;
   dispatch: React.Dispatch<ActionTypes>;
   isFeature: Boolean;
   feature: string;
+  renderImage: () => void;
 };
 
 const TileTools = (props: TileToolsType) => (
-  <section>
+  <section className={css.tools}>
     <button
       onClick={() => {
-        if (props.domEl != null) {
-          domtoimage.toBlob(props.domEl).then(function(blob: Blob) {
-            saveAs(blob, "my-node.png");
-          });
-        }
+        props.renderImage();
       }}
     >
       Convert to .png
@@ -34,6 +30,7 @@ const TileTools = (props: TileToolsType) => (
     >
       Toggle feature
     </button>
+    <br />
     {props.isFeature && (
       <>
         <label htmlFor="image">Background image</label>
@@ -59,6 +56,7 @@ const TileTools = (props: TileToolsType) => (
         >
           Remove image
         </button>
+        <br />
         <label>
           Feature title:
           <input

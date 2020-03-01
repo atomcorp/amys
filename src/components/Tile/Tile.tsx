@@ -1,5 +1,6 @@
 import React, { useRef, useReducer } from "react";
 import immer from "immer";
+import domtoimage from "dom-to-image";
 
 import { TrackType, StateType, ActionTypes } from "types";
 import css from "./Tile.module.css";
@@ -7,6 +8,7 @@ import TileTools from "components/Tile/TileTools";
 
 type TileType = {
   data: TrackType[];
+  page: number;
 };
 
 const handleNewLines = (string: String) => {
@@ -41,7 +43,7 @@ const handleDroppedChars = (string: String) => {
 
 const initialState = {
   showImg: false,
-  isFeature: true,
+  isFeature: false,
   feature: "Enter feature..."
 };
 
@@ -80,8 +82,16 @@ const Tile = (props: TileType) => {
       imgContainerRef.current.innerHTML = "";
     }
   };
+  const renderImage = () => {
+    if (tileRef.current != null) {
+      domtoimage.toBlob(tileRef.current).then(function(blob: Blob) {
+        saveAs(blob, "my-node.png");
+      });
+    }
+  };
   return (
     <>
+      <h3 className={css.heading}>Tile {props.page}</h3>
       <section
         ref={tileRef}
         className={`${css.container} ${state.showImg ? css.showImg : ""}`}
@@ -105,12 +115,12 @@ const Tile = (props: TileType) => {
         ))}
       </section>
       <TileTools
-        domEl={tileRef.current}
         addImage={addImage}
         removeImage={removeImage}
         dispatch={dispatch}
         isFeature={state.isFeature}
         feature={state.feature}
+        renderImage={renderImage}
       />
     </>
   );
