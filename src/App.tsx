@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import csvtojson from "csvtojson";
+import fakeData from "data.json";
 
 import Tiles from "components/Tiles/Tiles";
 import { TrackType } from "types";
@@ -56,7 +57,7 @@ function App() {
           Headers must be <code>Song,Artist,Label,Page</code>
         </fieldset>
       </div>
-      <Tiles data={data} />
+      <Tiles data={fakeData} />
     </div>
   );
 }

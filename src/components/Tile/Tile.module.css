@@ -20,7 +20,7 @@
 }
 
 .main {
-  font-size: 48px;
+  font-size: 36px;
   line-height: 1.2;
 }
 
@@ -64,7 +64,7 @@
 
 .featureTitle {
   text-transform: uppercase;
-  font-size: 48px;
+  font-size: 36px;
   color: #fff;
   padding: 0 20px 40px;
   position: relative;
@@ -81,4 +81,32 @@
 
 .heading {
   margin: 3px 0;
+}
+
+.radio1Container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 36px;
+  padding: 20px;
+}
+
+.radio1Square {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  transform: translateY(50px);
+}
+
+.featureSquare {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 15px 0 0;
 }

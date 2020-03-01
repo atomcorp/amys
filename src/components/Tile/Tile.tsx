@@ -6,6 +6,7 @@ import { saveAs } from "file-saver";
 import { TrackType, StateType, ActionTypes } from "types";
 import css from "./Tile.module.css";
 import TileTools from "components/Tile/TileTools";
+import TileRadio1 from "components/Tile/TileRadio1";
 
 type TileType = {
   data: TrackType[];
@@ -98,9 +99,11 @@ const Tile = (props: TileType) => {
         className={`${css.container} ${state.showImg ? css.showImg : ""}`}
       >
         <div ref={imgContainerRef} className={css.image}></div>
+        {props.page === 1 && <TileRadio1 />}
         {state.isFeature && (
           <div className={css.featureTitle}>
-            - {handleDroppedChars(state.feature)}
+            <div className={css.featureSquare} />{" "}
+            {handleDroppedChars(state.feature)}
           </div>
         )}
         {props.data.map((track, i) => (
