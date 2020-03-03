@@ -27,6 +27,15 @@ const handleNewLines = (string: String) => {
   });
 };
 
+export const fileName = (date: Date, page: number) => {
+  const prefixZero = (number: number): string => {
+    return number > 9 ? number.toString() : `0${number}`;
+  };
+  return `${prefixZero(date.getMonth() + 1)}-${prefixZero(
+    date.getDate()
+  )}--benjib-insta--page-${page}.png`;
+};
+
 const handleDroppedChars = (string: String) => {
   return string
     .toUpperCase()
@@ -87,7 +96,7 @@ const Tile = (props: TileType) => {
   const renderImage = () => {
     if (tileRef.current != null) {
       domtoimage.toBlob(tileRef.current).then(function(blob: Blob) {
-        saveAs(blob, "my-node.png");
+        saveAs(blob, fileName(new Date(), props.page));
       });
     }
   };

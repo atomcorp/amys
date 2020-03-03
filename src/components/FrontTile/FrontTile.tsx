@@ -4,6 +4,7 @@ import { saveAs } from "file-saver";
 import immer from "immer";
 
 import css from "./FrontTile.module.css";
+import { fileName } from "components/Tile/Tile";
 
 type StateType = {
   date: string;
@@ -99,7 +100,9 @@ const TileFront = () => {
           onClick={() => {
             if (tileRef.current != null) {
               domtoimage.toBlob(tileRef.current).then(function(blob: Blob) {
-                saveAs(blob, "my-node.png");
+                const dateArr = state.date.split("-").map(str => parseInt(str));
+                const dateObj = new Date(dateArr[0], --dateArr[1], dateArr[2]);
+                saveAs(blob, fileName(dateObj, 1));
               });
             }
           }}
