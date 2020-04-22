@@ -31,9 +31,9 @@ export const fileName = (date: Date, page: number) => {
   const prefixZero = (number: number): string => {
     return number > 9 ? number.toString() : `0${number}`;
   };
-  return `${prefixZero(date.getMonth() + 1)}-${prefixZero(
+  return `_${prefixZero(page)}--${prefixZero(date.getMonth() + 1)}-${prefixZero(
     date.getDate()
-  )}--benjib-insta--page-${page}.png`;
+  )}.png`;
 };
 
 const handleDroppedChars = (string: String) => {
@@ -96,7 +96,7 @@ const Tile = (props: TileType) => {
   const renderImage = () => {
     if (tileRef.current != null) {
       domtoimage.toBlob(tileRef.current).then(function(blob: Blob) {
-        saveAs(blob, fileName(new Date(), props.page));
+        saveAs(blob, fileName(new Date(), props.page + 1));
       });
     }
   };
