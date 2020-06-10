@@ -30,11 +30,13 @@
   font-size: 94px;
   display: flex;
   justify-content: space-between;
+  justify-content: center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 100%;
   padding: 20px 30px;
+  text-align: center;
 }
 
 .features {

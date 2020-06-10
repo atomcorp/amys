@@ -16,12 +16,12 @@ type ActionType =
   | { type: "date/set"; payload: string };
 
 const formatDate = (date: string) => {
-  const dateArr = date.split("-").map(str => parseInt(str));
+  const dateArr = date.split("-").map((str) => parseInt(str));
   const dateObj = new Date(dateArr[0], --dateArr[1], dateArr[2]);
   return new Intl.DateTimeFormat("en-GB", {
     year: "2-digit",
     month: "2-digit",
-    day: "2-digit"
+    day: "2-digit",
   })
     .format(dateObj)
     .replace(/\//g, "-");
@@ -35,15 +35,12 @@ const initDate = () => {
     "-" +
     (date.getMonth() + 1).toString().padStart(2, "0") +
     "-" +
-    date
-      .getDate()
-      .toString()
-      .padStart(2, "0")
+    date.getDate().toString().padStart(2, "0")
   );
 };
 
 const reducer = (state: StateType, action: ActionType) => {
-  return immer(state, draft => {
+  return immer(state, (draft) => {
     switch (action.type) {
       case "feature/set":
         draft.features = action.payload;
@@ -59,7 +56,7 @@ const reducer = (state: StateType, action: ActionType) => {
 
 const intialState = {
   date: initDate(),
-  features: "Here's a feature \n another"
+  features: "Here's a feature \n another",
 };
 
 const TileFront = () => {
@@ -84,13 +81,7 @@ const TileFront = () => {
         <div className={css.main}>
           <div className={css.date}>{formatDate(state.date)}</div>
           <div className={css.title}>
-            <span>
-              B<span className={css.drop}>E</span>NJI B.
-            </span>
-            <span>
-              TR
-              <span className={css.drop}>A</span>CKLIST
-            </span>
+            <span>TRACKLIST</span>
           </div>
           <div className={css.features}>{state.features}</div>
         </div>
@@ -99,8 +90,10 @@ const TileFront = () => {
         <button
           onClick={() => {
             if (tileRef.current != null) {
-              domtoimage.toBlob(tileRef.current).then(function(blob: Blob) {
-                const dateArr = state.date.split("-").map(str => parseInt(str));
+              domtoimage.toBlob(tileRef.current).then(function (blob: Blob) {
+                const dateArr = state.date
+                  .split("-")
+                  .map((str) => parseInt(str));
                 const dateObj = new Date(dateArr[0], --dateArr[1], dateArr[2]);
                 saveAs(blob, fileName(dateObj, 1));
               });
@@ -115,7 +108,7 @@ const TileFront = () => {
           id="image"
           type="file"
           accept=".png, .jpg, .jpeg"
-          onChange={e => {
+          onChange={(e) => {
             const target = e.target as HTMLInputElement;
             if (target.files != null && target.files.length > 0) {
               const imageBlob = target.files[0];
@@ -131,7 +124,7 @@ const TileFront = () => {
           <textarea
             rows={3}
             value={state.features}
-            onChange={e => {
+            onChange={(e) => {
               const target = e.target as HTMLTextAreaElement;
               dispatch({ type: "feature/set", payload: target.value });
             }}
@@ -143,7 +136,7 @@ const TileFront = () => {
           <input
             type="date"
             value={state.date}
-            onChange={e => {
+            onChange={(e) => {
               const target = e.target as HTMLInputElement;
               if (target.value !== "") {
                 dispatch({ type: "date/set", payload: target.value });
