@@ -39,8 +39,14 @@ export const fileName = (date: Date, page: number) => {
 const handleDroppedChars = (string: String) => {
   return string
     .toUpperCase()
-    .split("")
+    .split(/("A"|"E")|(A|E)/)
     .map((string, i) => {
+      if (/("A")/.test(string)) {
+        return "A";
+      }
+      if (/("E")/.test(string)) {
+        return "E";
+      }
       if (/A|E/.test(string)) {
         return (
           <span key={i} className={css.drop}>
@@ -55,11 +61,11 @@ const handleDroppedChars = (string: String) => {
 const initialState = {
   showImg: false,
   isFeature: false,
-  feature: "Enter feature..."
+  feature: "Enter feature...",
 };
 
 const reducer = (state: StateType, action: ActionTypes) => {
-  return immer(state, draftState => {
+  return immer(state, (draftState) => {
     switch (action.type) {
       case "showImage/set":
         draftState.showImg = action.payload;
@@ -95,7 +101,7 @@ const Tile = (props: TileType) => {
   };
   const renderImage = () => {
     if (tileRef.current != null) {
-      domtoimage.toBlob(tileRef.current).then(function(blob: Blob) {
+      domtoimage.toBlob(tileRef.current).then(function (blob: Blob) {
         saveAs(blob, fileName(new Date(), props.page + 1));
       });
     }
