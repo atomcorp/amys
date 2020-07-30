@@ -81,7 +81,13 @@ const TileFront = () => {
         <div className={css.main}>
           <div className={css.date}>{formatDate(state.date)}</div>
           <div className={css.title}>
-            <span>TRACKLIST</span>
+            <span>
+              B<span className={css.drop}>E</span>NJI B.
+            </span>
+            <span>
+              TR
+              <span className={css.drop}>A</span>CKLIST
+            </span>
           </div>
           <div className={css.features}>{state.features}</div>
         </div>
