@@ -1,8 +1,11 @@
 .container {
   width: 1080px;
   height: 1080px;
-  background: #231f20;
   position: relative;
+}
+
+.hasBackground {
+  background: #231f20;
 }
 
 .main {

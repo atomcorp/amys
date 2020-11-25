@@ -10,6 +10,7 @@ type TileToolsType = {
   isFeature: Boolean;
   feature: string;
   renderImage: () => void;
+  hasBackground: boolean;
 };
 
 const TileTools = (props: TileToolsType) => (
@@ -29,6 +30,16 @@ const TileTools = (props: TileToolsType) => (
     >
       Toggle feature
     </button>
+    <label>
+      Background:
+      <input
+        type="checkbox"
+        checked={props.hasBackground}
+        onChange={() => {
+          props.dispatch({ type: "background/toggle" });
+        }}
+      />
+    </label>
     <br />
     {props.isFeature && (
       <>
@@ -37,7 +48,7 @@ const TileTools = (props: TileToolsType) => (
           id="image"
           type="file"
           accept=".png, .jpg, .jpeg"
-          onChange={e => {
+          onChange={(e) => {
             const target = e.target as HTMLInputElement;
             if (target.files != null && target.files.length > 0) {
               const imageBlob = target.files[0];
@@ -61,7 +72,7 @@ const TileTools = (props: TileToolsType) => (
           <input
             type="text"
             value={props.feature}
-            onChange={e => {
+            onChange={(e) => {
               const target = e.target as HTMLInputElement;
               props.dispatch({ type: "feature/set", payload: target.value });
             }}

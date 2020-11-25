@@ -9,11 +9,13 @@ import { fileName } from "components/Tile/Tile";
 type StateType = {
   date: string;
   features: string;
+  hasBackground: boolean;
 };
 
 type ActionType =
   | { type: "feature/set"; payload: string }
-  | { type: "date/set"; payload: string };
+  | { type: "date/set"; payload: string }
+  | { type: "background/toggle" };
 
 const formatDate = (date: string) => {
   const dateArr = date.split("-").map((str) => parseInt(str));
@@ -48,6 +50,9 @@ const reducer = (state: StateType, action: ActionType) => {
       case "date/set":
         draft.date = action.payload;
         break;
+      case "background/toggle":
+        draft.hasBackground = !state.hasBackground;
+        break;
       default:
         break;
     }
@@ -57,6 +62,7 @@ const reducer = (state: StateType, action: ActionType) => {
 const intialState = {
   date: initDate(),
   features: "Here's a feature \n another",
+  hasBackground: true,
 };
 
 const TileFront = () => {
@@ -76,7 +82,12 @@ const TileFront = () => {
   return (
     <>
       <h3 className={css.heading}>Front tile</h3>
-      <section className={css.container} ref={tileRef}>
+      <section
+        className={`${css.container} ${
+          state.hasBackground ? css.hasBackground : ""
+        }`}
+        ref={tileRef}
+      >
         <div ref={imgContainerRef} className={css.image}></div>
         <div className={css.main}>
           <div className={css.date}>{formatDate(state.date)}</div>
@@ -149,6 +160,16 @@ const TileFront = () => {
               } else {
                 dispatch({ type: "date/set", payload: initDate() });
               }
+            }}
+          />
+        </label>
+        <label>
+          Background:
+          <input
+            type="checkbox"
+            checked={state.hasBackground}
+            onChange={() => {
+              dispatch({ type: "background/toggle" });
             }}
           />
         </label>

@@ -62,6 +62,7 @@ const initialState = {
   showImg: false,
   isFeature: false,
   feature: "Enter feature...",
+  hasBackground: true,
 };
 
 const reducer = (state: StateType, action: ActionTypes) => {
@@ -75,6 +76,10 @@ const reducer = (state: StateType, action: ActionTypes) => {
         break;
       case "feature/set":
         draftState.feature = action.payload;
+        break;
+      case "background/toggle":
+        draftState.hasBackground = !state.hasBackground;
+        break;
     }
   });
 };
@@ -111,7 +116,9 @@ const Tile = (props: TileType) => {
       <h3 className={css.heading}>Tile {props.page}</h3>
       <section
         ref={tileRef}
-        className={`${css.container} ${state.showImg ? css.showImg : ""}`}
+        className={`${css.container} ${state.showImg ? css.showImg : ""} ${
+          state.hasBackground ? css.hasBackground : ""
+        }`}
       >
         <div ref={imgContainerRef} className={css.image}></div>
         {props.page === 1 && <TileRadio1 />}
@@ -140,6 +147,7 @@ const Tile = (props: TileType) => {
         isFeature={state.isFeature}
         feature={state.feature}
         renderImage={renderImage}
+        hasBackground={state.hasBackground}
       />
     </>
   );
